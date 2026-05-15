@@ -2,7 +2,7 @@
 
 This repository provides guided provisioning scripts for installing **iDempiere 12** with PostgreSQL 15, Java 17, and an automatically generated runtime environment.
 
-The `12` branch is now the main branch for all iDempiere 12 installer variants. Each installer lives in its own folder.
+Choose the installer folder that matches your server architecture and operating system.
 
 ## Contributors
 
@@ -25,17 +25,16 @@ The `12` branch is now the main branch for all iDempiere 12 installer variants. 
   </tr>
 </table>
 
-> [!IMPORTANT]
-> Installer URLs changed because all variants now live inside the `12` branch.
-> Use the folder-based commands in this README instead of the old branch-based URLs.
+> [!NOTE]
+> Each installer has its own folder with a dedicated `provision.sh` script and variant-specific documentation.
 
 ## Available Installers
 
-| Variant | Use case | Java | Installer command | Details |
+| Variant | Architecture | Operating system | Java | Details |
 | --- | --- | --- | --- | --- |
-| `12-x86` | iDempiere 12 for AMD64 / x86_64 servers | OpenJDK 17 | `sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-x86/provision.sh)'` | [README](12-x86/README.md) |
-| `12-arm` | iDempiere 12 variant maintained in a separate folder | OpenJDK 17 | `sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-arm/provision.sh)'` | [README](12-arm/README.md) |
-| `12-x86Debian` | iDempiere 12 for Debian 13 (Trixie) | Temurin 17 | `sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-x86Debian/provision.sh)'` | [README](12-x86Debian/README.md) |
+| `12-x86` | AMD64 / x86_64 | Debian or Ubuntu-compatible systems | OpenJDK 17 | [README](12-x86/README.md) |
+| `12-arm` | ARM variant | Debian or Ubuntu-compatible systems | OpenJDK 17 | [README](12-arm/README.md) |
+| `12-x86Debian` | AMD64 / x86_64 | Debian 13 (Trixie) | Temurin 17 | [README](12-x86Debian/README.md) |
 
 ## Quick Install
 
