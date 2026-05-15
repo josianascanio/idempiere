@@ -3,8 +3,7 @@
 This folder contains the iDempiere 12 provisioning script for **Debian 13 (Trixie)** using **Temurin 17**.
 
 > [!IMPORTANT]
-> This installer now lives inside the `12` branch under the `12-x86Debian/` folder.
-> Use the command below instead of the old branch-based URL.
+> Run this installer on Debian 13 (Trixie) with root or sudo access.
 
 ## Install
 

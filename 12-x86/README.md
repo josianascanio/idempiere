@@ -3,8 +3,7 @@
 This folder contains the iDempiere 12 provisioning script for **AMD64 / x86_64** servers using **OpenJDK 17**.
 
 > [!IMPORTANT]
-> This installer now lives inside the `12` branch under the `12-x86/` folder.
-> Use the command below instead of the old branch-based URL.
+> Run this installer on an AMD64 / x86_64 server with root or sudo access.
 
 ## Install
 

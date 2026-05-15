@@ -3,8 +3,7 @@
 This folder contains the iDempiere 12 provisioning script for the `12-arm` variant using **OpenJDK 17**.
 
 > [!IMPORTANT]
-> This installer now lives inside the `12` branch under the `12-arm/` folder.
-> Use the command below instead of the old branch-based URL.
+> Run this installer on a server prepared for the `12-arm` variant with root or sudo access.
 
 ## Install
 
