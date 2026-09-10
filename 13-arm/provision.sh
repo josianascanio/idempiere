@@ -204,7 +204,7 @@ mkdir -p "$IDEMPIERE_HOME"
 step "Descargando build.zip (si no existe)"
 if [[ ! -f "build.zip" ]]; then
   wget --progress=bar:force:noscroll -O build.zip \
-    "https://sourceforge.net/projects/idempiere/files/v12/daily-server/idempiereServer12Daily.gtk.linux.x86_64.zip"
+    "https://sourceforge.net/projects/idempiere/files/v13/daily-server/idempiereServer13Daily.gtk.linux.x86_64.zip"
 fi
 
 step "Extrayendo build.zip"

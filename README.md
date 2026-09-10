@@ -1,6 +1,6 @@
-# iDempiere 12 Provisioning Scripts
+# iDempiere 13 Provisioning Scripts
 
-This repository provides guided provisioning scripts for installing **iDempiere 12** with PostgreSQL 15, Java 17, and an automatically generated runtime environment.
+This repository provides guided provisioning scripts for installing **iDempiere 13** with PostgreSQL 15, Java 17, and an automatically generated runtime environment.
 
 Choose the installer folder that matches your server architecture and operating system.
 
@@ -32,35 +32,35 @@ Choose the installer folder that matches your server architecture and operating 
 
 | Variant | Architecture | Operating system | Java | Details |
 | --- | --- | --- | --- | --- |
-| `12-x86` | AMD64 / x86_64 | Debian or Ubuntu-compatible systems | OpenJDK 17 | [README](12-x86/README.md) |
-| `12-arm` | ARM variant | Debian or Ubuntu-compatible systems | OpenJDK 17 | [README](12-arm/README.md) |
-| `12-x86Debian` | AMD64 / x86_64 | Debian 13 (Trixie) | Temurin 17 | [README](12-x86Debian/README.md) |
+| `13-x86` | AMD64 / x86_64 | Debian or Ubuntu-compatible systems | OpenJDK 17 | [README](13-x86/README.md) |
+| `13-arm` | ARM variant | Debian or Ubuntu-compatible systems | OpenJDK 17 | [README](13-arm/README.md) |
+| `13-x86Debian` | AMD64 / x86_64 | Debian 13 (Trixie) | Temurin 17 | [README](13-x86Debian/README.md) |
 
 ## Quick Install
 
 Choose the installer that matches your target environment and run the matching command as `root` or with `sudo`.
 
-### 12-x86
+### 13-x86
 
 ```bash
-sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-x86/provision.sh)'
+sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/13/13-x86/provision.sh)'
 ```
 
-### 12-arm
+### 13-arm
 
 ```bash
-sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-arm/provision.sh)'
+sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/13/13-arm/provision.sh)'
 ```
 
-### 12-x86Debian
+### 13-x86Debian
 
 ```bash
-sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-x86Debian/provision.sh)'
+sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/13/13-x86Debian/provision.sh)'
 ```
 
 ## What The Installers Do
 
-All installers automate the main steps needed to prepare an iDempiere 12 server:
+All installers automate the main steps needed to prepare an iDempiere 13 server:
 
 - Ask for environment parameters through a `whiptail` interface.
 - Configure the environment name, base port, installation folder, PostgreSQL host, and `adempiere` database password.
@@ -68,7 +68,7 @@ All installers automate the main steps needed to prepare an iDempiere 12 server:
 - Optionally add the official PostgreSQL repository.
 - Install or configure Java 17 according to the selected variant.
 - Optionally install PostgreSQL 15 and Nginx.
-- Download the iDempiere 12 server package.
+- Download the iDempiere 13 server package.
 - Create `idempiereEnv.properties`.
 - Run the silent setup, database import, database sync, and database signing scripts.
 - Create the `idempiere` system user when needed.
@@ -157,6 +157,6 @@ java -version
 
 Each folder contains a short README with only the details that differ for that installer:
 
-- [12-x86](12-x86/README.md)
-- [12-arm](12-arm/README.md)
-- [12-x86Debian](12-x86Debian/README.md)
+- [13-x86](13-x86/README.md)
+- [13-arm](13-arm/README.md)
+- [13-x86Debian](13-x86Debian/README.md)

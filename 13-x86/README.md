@@ -1,30 +1,30 @@
-# iDempiere 12 ARM Installer
+# iDempiere 13 x86 Installer
 
-This folder contains the iDempiere 12 provisioning script for the `12-arm` variant using **OpenJDK 17**.
+This folder contains the iDempiere 13 provisioning script for **AMD64 / x86_64** servers using **OpenJDK 17**.
 
 > [!IMPORTANT]
-> Run this installer on a server prepared for the `12-arm` variant with root or sudo access.
+> Run this installer on an AMD64 / x86_64 server with root or sudo access.
 
 ## Install
 
 ```bash
-sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-arm/provision.sh)'
+sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/13/13-x86/provision.sh)'
 ```
 
 ## Variant Details
 
-- Target variant: `12-arm`
+- Target variant: `13-x86`
 - Java package: `openjdk-17-jdk-headless`
 - PostgreSQL version: PostgreSQL 15
 - Web server: optional Nginx installation
-- iDempiere server package: the iDempiere 12 server package used by this variant
+- iDempiere server package: iDempiere 13 daily server package for x86_64
 
 ## Java Configuration
 
 This installer uses OpenJDK 17 and writes this fixed Java path to `idempiereEnv.properties`:
 
 ```properties
-JAVA_HOME=/usr/lib/jvm/java-17-openjdk-arm64
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ```
 
 If your operating system installs Java in a different path, update `JAVA_HOME` before running iDempiere in production.

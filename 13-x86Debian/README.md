@@ -1,6 +1,6 @@
-# iDempiere 12 Debian Installer
+# iDempiere 13 Debian Installer
 
-This folder contains the iDempiere 12 provisioning script for **Debian 13 (Trixie)** using **Temurin 17**.
+This folder contains the iDempiere 13 provisioning script for **Debian 13 (Trixie)** using **Temurin 17**.
 
 > [!IMPORTANT]
 > Run this installer on Debian 13 (Trixie) with root or sudo access.
@@ -8,18 +8,18 @@ This folder contains the iDempiere 12 provisioning script for **Debian 13 (Trixi
 ## Install
 
 ```bash
-sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/12/12-x86Debian/provision.sh)'
+sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/idempiere/13/13-x86Debian/provision.sh)'
 ```
 
 ## Variant Details
 
-- Target variant: `12-x86Debian`
+- Target variant: `13-x86Debian`
 - Recommended operating system: Debian 13 (Trixie)
 - Java package: `temurin-17-jdk`
 - Java repository: Adoptium APT repository
 - PostgreSQL version: PostgreSQL 15
 - Web server: optional Nginx installation
-- iDempiere server package: iDempiere 12 daily server package for x86_64
+- iDempiere server package: iDempiere 13 daily server package for x86_64
 
 ## Java Configuration
 
