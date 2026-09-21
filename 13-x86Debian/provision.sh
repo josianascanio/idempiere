@@ -92,6 +92,7 @@ ENTORNO_DEFAULT="idempiere"
 PUERTO_DEFAULT="80"
 FOLDER_DEFAULT="sas"
 DB_SERVER_DEFAULT="localhost"
+DB_PORT_DEFAULT="5432"
 DB_PASS_DEFAULT="adempiere"
 
 while true; do
@@ -99,16 +100,23 @@ while true; do
   PUERTO="$(w_input "Parámetros iDempiere" "PUERTO base (ej: 80, 81, 82). Se usa para WEB_PORT=80\$PUERTO:" "$PUERTO_DEFAULT")"
   FOLDER="$(w_input "Parámetros iDempiere" "FOLDER (carpeta base en /opt, ej: sas):" "$FOLDER_DEFAULT")"
   DB_SERVER="$(w_input "Parámetros iDempiere" "DB_SERVER (host Postgres, ej: localhost):" "$DB_SERVER_DEFAULT")"
+  DB_PORT="$(w_input "Parámetros iDempiere" "DB_PORT (puerto PostgreSQL, ej: 5432):" "$DB_PORT_DEFAULT")"
   DB_PASS="$(w_input "Parámetros iDempiere" "DB_PASS (clave del usuario adempiere):" "$DB_PASS_DEFAULT")"
 
   ENTORNO="${ENTORNO:-$ENTORNO_DEFAULT}"
   PUERTO="${PUERTO:-$PUERTO_DEFAULT}"
   FOLDER="${FOLDER:-$FOLDER_DEFAULT}"
   DB_SERVER="${DB_SERVER:-$DB_SERVER_DEFAULT}"
+  DB_PORT="${DB_PORT:-$DB_PORT_DEFAULT}"
   DB_PASS="${DB_PASS:-$DB_PASS_DEFAULT}"
 
   if ! [[ "$PUERTO" =~ ^[0-9]+$ ]]; then
     w_msg "Error" "PUERTO debe ser numérico."
+    continue
+  fi
+
+  if ! [[ "$DB_PORT" =~ ^[0-9]+$ ]] || (( DB_PORT < 1 || DB_PORT > 65535 )); then
+    w_msg "Error" "DB_PORT debe ser un número entre 1 y 65535."
     continue
   fi
 
@@ -118,6 +126,7 @@ ENTORNO:    $ENTORNO
 PUERTO:     $PUERTO
 FOLDER:     $FOLDER
 DB_SERVER:  $DB_SERVER
+DB_PORT:    $DB_PORT
 DB_PASS:    $DB_PASS
 "
   w_msg "Resumen" "$SUMMARY"
@@ -143,7 +152,7 @@ DEPS="$(w_checklist "Dependencias" "Selecciona qué quieres instalar/asegurar en
   "repo_pg"  "Agregar repo oficial PostgreSQL (apt.postgresql.org)" ON \
   "base"     "git, expect, fontconfig, unzip, wget, curl, ca-certificates" ON \
   "java17"   "Temurin/OpenJDK 17" ON \
-  "pg15"     "PostgreSQL 15" ON \
+  "pg17"     "PostgreSQL 17" ON \
   "nginx"    "Nginx" ON \
   "skip"     "NO instalar nada (solo continuar)" OFF
 )"
@@ -159,7 +168,7 @@ fi
 clear
 
 export IDEMPIERE_HOME="/opt/${FOLDER}/${PUERTO}_${ENTORNO}"
-export ENTORNO PUERTO FOLDER DB_SERVER DB_PASS
+export ENTORNO PUERTO FOLDER DB_SERVER DB_PORT DB_PASS
 
 echo "Iniciando instalación..."
 
@@ -189,9 +198,9 @@ if [[ "$INSTALL_ANY" == "yes" ]]; then
     apt install -y temurin-17-jdk
   fi
 
-  if [[ "$DEPS" == *"pg15"* ]]; then
-    step "Instalando PostgreSQL 15"
-    apt install -y postgresql-15
+  if [[ "$DEPS" == *"pg17"* ]]; then
+    step "Instalando PostgreSQL 17"
+    apt install -y postgresql-17
   fi
 
   if [[ "$DEPS" == *"nginx"* ]]; then
@@ -219,21 +228,24 @@ java -version
 javac -version
 
 # Config Postgres si existe
-if [[ -d "/etc/postgresql/15/main" ]]; then
+if [[ -d "/etc/postgresql/17/main" ]]; then
+  step "Configurando puerto PostgreSQL ($DB_PORT)"
+  pg_conftool 17 main set port "$DB_PORT"
+
   step "Configurando PostgreSQL (pg_hba.conf)"
-  cat << 'EOF' > /etc/postgresql/15/main/pg_hba.conf
+  cat << 'EOF' > /etc/postgresql/17/main/pg_hba.conf
 local   all             postgres                                peer
 local   all             all                                     md5
 host    all             all             127.0.0.1/32            md5
 host    all             all             ::1/128                 md5
 EOF
 
-  step "Asignando clave a postgres"
-  sudo -u postgres psql -U postgres -c "alter user postgres password 'postgres';" || true
-
   step "Reiniciando PostgreSQL"
   systemctl enable postgresql || true
   systemctl restart postgresql || true
+
+  step "Asignando clave a postgres"
+  sudo -u postgres psql -p "$DB_PORT" -U postgres -c "alter user postgres password 'postgres';" || true
 fi
 
 # Install iDempiere
@@ -281,7 +293,7 @@ ADEMPIERE_DB_PATH=postgresql
 #Database server host name
 ADEMPIERE_DB_SERVER=$DB_SERVER
 #Database port, oracle[1512], postgresql[5432]
-ADEMPIERE_DB_PORT=5432
+ADEMPIERE_DB_PORT=$DB_PORT
 #Database name
 ADEMPIERE_DB_NAME=${PUERTO}_${ENTORNO}
 #Database system user password

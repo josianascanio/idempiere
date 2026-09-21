@@ -17,7 +17,8 @@ sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/
 - Recommended operating system: Debian 13 (Trixie)
 - Java package: `temurin-17-jdk`
 - Java repository: Adoptium APT repository
-- PostgreSQL version: PostgreSQL 15
+- PostgreSQL version: PostgreSQL 17
+- PostgreSQL port: configurable during installation, default `5432`
 - Web server: optional Nginx installation
 - iDempiere server package: iDempiere 13 daily server package for x86_64
 

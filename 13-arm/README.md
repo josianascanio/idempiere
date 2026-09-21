@@ -15,7 +15,8 @@ sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/
 
 - Target variant: `13-arm`
 - Java package: `openjdk-17-jdk-headless`
-- PostgreSQL version: PostgreSQL 15
+- PostgreSQL version: PostgreSQL 17
+- PostgreSQL port: configurable during installation, default `5432`
 - Web server: optional Nginx installation
 - iDempiere server package: the iDempiere 13 server package used by this variant
 

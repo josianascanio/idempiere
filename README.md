@@ -1,6 +1,6 @@
 # iDempiere 13 Provisioning Scripts
 
-This repository provides guided provisioning scripts for installing **iDempiere 13** with PostgreSQL 15, Java 17, and an automatically generated runtime environment.
+This repository provides guided provisioning scripts for installing **iDempiere 13** with PostgreSQL 17, Java 17, and an automatically generated runtime environment.
 
 Choose the installer folder that matches your server architecture and operating system.
 
@@ -63,11 +63,11 @@ sudo bash -c 'bash <(curl -fsSL https://raw.githubusercontent.com/josianascanio/
 All installers automate the main steps needed to prepare an iDempiere 13 server:
 
 - Ask for environment parameters through a `whiptail` interface.
-- Configure the environment name, base port, installation folder, PostgreSQL host, and `adempiere` database password.
+- Configure the environment name, base port, installation folder, PostgreSQL host and port, and `adempiere` database password.
 - Optionally install required dependencies.
 - Optionally add the official PostgreSQL repository.
 - Install or configure Java 17 according to the selected variant.
-- Optionally install PostgreSQL 15 and Nginx.
+- Optionally install PostgreSQL 17 and Nginx.
 - Download the iDempiere 13 server package.
 - Create `idempiereEnv.properties`.
 - Run the silent setup, database import, database sync, and database signing scripts.
@@ -83,6 +83,8 @@ All installers automate the main steps needed to prepare an iDempiere 13 server:
 - 2 CPU or more recommended.
 - 4 GB RAM minimum recommended.
 - 20 GB free disk space or more recommended.
+
+The PostgreSQL port is requested during installation. It defaults to `5432`, can be changed to any valid TCP port from `1` to `65535`, and is applied to both the local PostgreSQL cluster and the generated iDempiere configuration.
 
 > [!NOTE]
 > The Debian 13 variant uses Temurin 17 because the traditional OpenJDK package may not be available in that environment.
